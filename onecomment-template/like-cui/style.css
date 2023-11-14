@@ -70,9 +70,10 @@ div[data-owner="false"] .root-user {
   display: none;
 }
 
-.char {
+.char{
   opacity: 0;
-  animation: type steps(1) forwards, 0.1s bar steps(1) forwards;
+  border-right: 0.1em solid var(--main-color);
+  animation: type 0ms step-start forwards, bar 100ms step-end forwards;
 }
 
 @keyframes type {
@@ -84,12 +85,20 @@ div[data-owner="false"] .root-user {
   }
 }
 
+/*
+  chrome での不具合を無理やり修正
+  animation-delay を大量の要素につけると, いくつか上手く 100% まで移動しなくなるが, 中間点を追加することで動くようになった
+  firefox ではいらない
+*/
 @keyframes bar {
   from {
     border-right: 0.1em solid var(--main-color);
   }
+  80% {
+    border: none;
+  }
   to {
-    border-right: none;
+    border: none;
   }
 }
 

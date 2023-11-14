@@ -1,11 +1,12 @@
 const JSON_PATH = '../../comment.json'
 const LIMIT = 30
-const TYPING_INTERVAL = 0.1
-const TYPING_DELAY = 0.2
+const TYPING_INTERVAL = 100
+const TYPING_DELAY = 200
 
-const htmlToTypeChar = (html, index) => (
-  `<div class='char' style='animation-delay:${index * TYPING_INTERVAL+TYPING_DELAY}s'>${html}</div>`
-)
+const htmlToTypeChar = (html, index) => {
+  const delayMiliSecond = index * TYPING_INTERVAL+TYPING_DELAY
+  return `<div class='char' style='animation-delay:${delayMiliSecond}ms'>${html}</div>`
+}
 
 const attachTypingAnim = (comment) => {
   const imgReg = /<img [^<>]+>/g
