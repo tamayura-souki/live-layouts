@@ -1,15 +1,6 @@
 @import url('../__origin/css/common.css');
 
-/* デバッグ用 */
-:root {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-/* 独自定義変数 */
-:root {
-  --main-color: rgba(224,224,224,1);
-}
-
+/* ↓ワンコメ機能側の設定↓ */
 /* ワンコメ機能側での変数 */
 :root {
   --lcv-direction: column-reverse;
@@ -21,16 +12,45 @@
   --lcv-name-shadow: var(--lcv-name-shadow-0);
   --lcv-name-shadow-color: rgba(255, 255, 255, 1);
   --lcv-comment-shadow: var(--lcv-comment-shadow-0);
-  --lcv-comment-shadow-color: rgba(255, 255, 255, 1)
-}
+  --lcv-comment-shadow-color: rgba(255, 255, 255, 1);
 
-:root {
   --lcv-timeout: 30s;
 }
 
+/* わんコメのコメントの入退場の設定 */
+:root {
+  --lcv-enter-duration: 100ms;
+  --lcv-move-duration: 200ms;
+}
+
+.comment-enter-active,.comment-leave-active {
+  transition: opacity var(--lcv-enter-duration) var(--lcv-enter-easing)!important;
+}
+
+.comment-enter-from,.comment-leave-to {
+  opacity: 0!important;
+  transform: none!important;
+}
+/* ↑ワンコメ機能側の設定↑ */
+
+/* ↓このテーマ独自の部分↓ */
+/* 独自定義変数 */
+:root {
+  --cui-main-color: rgba(224,224,224,1);
+  --cui-background-color: rgba(0, 0, 0, 0.5);
+  --cui-font-name: "ＭＳ ゴシック";
+  --cui-line-height: 1;
+  --cui-comment-padding: 0.5em;
+  --main-color: var(--cui-main-color);
+}
+
+:root {
+  background: var(--cui-background-color);
+}
+
 body {
-  font-family: "ＭＳ ゴシック";
-  line-height: 1;
+  font-family: var(--cui-font-name);
+  line-height: var(--cui-line-height);
 }
 
 .avatar {
@@ -46,7 +66,7 @@ body {
 .comment {
   margin-top: 0;
   margin-bottom: 0;
-  padding: 0.5em 0.2em;
+  padding: var(--cui-comment-padding) 0.2em;
 }
 
 .name {
@@ -72,7 +92,7 @@ div[data-owner="false"] .root-user {
 
 .char{
   opacity: 0;
-  border-right: 0.1em solid var(--main-color);
+  border-right: 0.1em solid var(--cui-main-color);
   animation: type 0ms step-start forwards, bar 100ms step-end forwards;
 }
 
@@ -92,7 +112,7 @@ div[data-owner="false"] .root-user {
 */
 @keyframes bar {
   from {
-    border-right: 0.1em solid var(--main-color);
+    border-right: 0.1em solid var(--cui-main-color);
   }
   80% {
     border: none;
@@ -101,18 +121,5 @@ div[data-owner="false"] .root-user {
     border: none;
   }
 }
+/* ↑このテーマ独自の部分↑ */
 
-:root {
-    --lcv-enter-duration: 100ms;
-    --lcv-move-duration: 200ms;
-}
-
-.comment-enter-active,.comment-leave-active {
-  transition: opacity var(--lcv-enter-duration) var(--lcv-enter-easing)!important;
-}
-
-.comment-enter-from,.comment-leave-to {
-  opacity: 0!important;
-  transform: none!important;
-}
-/* テンプレカスタム ここまで */
