@@ -25,12 +25,13 @@ const htmlToTypeChar = (html, index) => {
 const attachTypingAnim = (comment) => {
   const imgReg = /<img [^<>]+>/g
   const imgTags = [...comment.matchAll(imgReg)]
-  comment = comment.replaceAll(imgReg, '\t')
+  const placeHolderToken = '\t'
+  comment = comment.replaceAll(imgReg, placeHolderToken)
 
   comment = Array.prototype.map.call(comment, htmlToTypeChar).join('')
 
   imgTags.forEach((value) => {
-    comment.replace('\t', value[0])
+    comment = comment.replace(placeHolderToken, value[0])
   })
 
   return comment;
