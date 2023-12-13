@@ -23,14 +23,15 @@ const htmlToTypeChar = (html, index) => {
  * @returns タイピングアニメーションを付与した comment
  */
 const attachTypingAnim = (comment) => {
-  const imgReg = /<img [^<>]+>/g
-  const imgTags = [...comment.matchAll(imgReg)]
+  console.log(comment)
+  const specialTokenReg = /(<img [^<>]+>)|(&lt;)|(&gt;)|(&amp;)/g
+  const specialTokens = [...comment.matchAll(specialTokenReg)]
   const placeHolderToken = '\t'
-  comment = comment.replaceAll(imgReg, placeHolderToken)
+  comment = comment.replaceAll(specialTokenReg, placeHolderToken)
 
   comment = Array.prototype.map.call(comment, htmlToTypeChar).join('')
 
-  imgTags.forEach((value) => {
+  specialTokens.forEach((value) => {
     comment = comment.replace(placeHolderToken, value[0])
   })
 
